@@ -9,6 +9,6 @@ import { findPathUrl } from './utils/cid'
  */
 export async function anyUrlGet (request, env) {
   const hostname = await pickGatewayHost(caches.default, env)
-  const url = findPathUrl(new URL(request.url), hostname)
+  const url = findPathUrl(request.url, hostname)
   return Response.redirect(url, 302)  
 }

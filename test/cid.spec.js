@@ -15,7 +15,7 @@ const pathUrls = [
 
 test('findPathUrl', (t) => {
   for (const [input, expected] of pathUrls) {
-    const output = findPathUrl(new URL(input), 'ipfs.nftstorage.link').toString()
+    const output = findPathUrl(input, 'ipfs.nftstorage.link').toString()
     t.is(output, expected, `${input}`)
   }
 })
