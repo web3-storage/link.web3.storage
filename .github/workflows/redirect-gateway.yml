@@ -1,0 +1,64 @@
+name: redirect-gateway
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+       - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm install
+      - run: npm test
+  deploy-staging:
+    name: Deploy Staging
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm install
+      - name: Publish app
+        # FIXME: uses Node.js 16 not 12 (upcoming release).
+        # FIXME: update to tag > 1.3.0 when released.
+        uses: cloudflare/wrangler-action@6f62debcf8abf8e33e41343df9d7ab49612c324d
+        env:
+          ENV: 'staging' # inform the build process what the env is
+        with:
+          apiToken: ${{ secrets.CF_GATEWAY_TOKEN }}
+          environment: 'staging'
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    name: Release
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: GoogleCloudPlatform/release-please-action@v3
+        id: tag-release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+          monorepo-tags: false
+          package-name: redirect-gateway
+      - uses: actions/checkout@v3
+        if: ${{ steps.tag-release.outputs.releases_created }}
+      - uses: actions/setup-node@v3
+        if: ${{ steps.tag-release.outputs.releases_created }}
+      - run: npm install
+        if: ${{ steps.tag-release.outputs.releases_created }}
+      - name: Deploy
+        if: ${{ steps.tag-release.outputs.releases_created }}
+        # FIXME: uses Node.js 16 not 12 (upcoming release).
+        # FIXME: update to tag > 1.3.0 when released.
+        uses: cloudflare/wrangler-action@6f62debcf8abf8e33e41343df9d7ab49612c324d
+        env:
+          ENV: 'production' # inform the build process what the env is
+        with:
+          apiToken: ${{ secrets.CF_GATEWAY_TOKEN }}
+          environment: 'production'

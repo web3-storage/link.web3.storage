@@ -1,4 +1,4 @@
-# nftstorage.link wrangler config.
+# link.web3.storage wrangler config.
 name = "link-web3-storage"
 
 # `javascript` means our we'll send pre-built javascript code. 
