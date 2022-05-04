@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://github.com/web3-storage/link.web3.storage/compare/v1.0.1...v1.0.2) (2022-05-04)
+
+
+### Bug Fixes
+
+* check nftstorage.link status in any-url path ([#6](https://github.com/web3-storage/link.web3.storage/issues/6)) ([b8b97ad](https://github.com/web3-storage/link.web3.storage/commit/b8b97ad0428fdcdd167d8603725eacfbb9154c13))
+* different url implementation ([#7](https://github.com/web3-storage/link.web3.storage/issues/7)) ([ec08409](https://github.com/web3-storage/link.web3.storage/commit/ec084092df49144ad2d48987d952fef8f38421a5))
+
 ### [1.0.1](https://github.com/web3-storage/link.web3.storage/compare/v1.0.0...v1.0.1) (2022-05-04)
 
 
