@@ -2,7 +2,7 @@ import { InvalidUrlError } from './errors.js'
 import { findPathUrl } from './utils/cid'
 
 /**
- * Handle gateway request
+ * Handle any url request
  *
  * @param {Request} request
  * @param {import('./env').Env} env
