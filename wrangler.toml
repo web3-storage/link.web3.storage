@@ -1,0 +1,62 @@
+# nftstorage.link wrangler config.
+name = "link-web3-storage"
+
+# `javascript` means our we'll send pre-built javascript code. 
+#  ...as opposed to `webpack` where wrangler builds our code for us.
+type = "javascript"
+
+account_id = ""
+watch_dir = "src"
+compatibility_date = "2021-12-03"
+
+[build]
+command = "npm run build"
+[build.upload]
+format = "modules"
+dir = "dist"
+main = "worker.mjs"
+
+# PROD!
+[env.production]
+# name = "gateway-nft-storage-production"
+account_id = "fffa4b4363a7e5250af8357087263b3a" # Protocol Labs CF account
+zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
+route = "link.web3.storage/*"
+
+[env.production.vars]
+IPFS_GATEWAYS = "[\"https://dweb.link\""
+GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
+DEBUG = "false"
+ENV = "production"
+
+# Staging!
+[env.staging]
+# name = "gateway-nft-storage-staging"
+account_id = "fffa4b4363a7e5250af8357087263b3a" # Protocol Labs CF account
+zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
+route = "link-staging.web3.storage/*"
+
+[env.staging.vars]
+IPFS_GATEWAYS = "[\"https://dweb.link\""
+GATEWAY_HOSTNAME = 'ipfs-staging.nftstorage.link'
+DEBUG = "true"
+ENV = "staging"
+
+# Test!
+[env.test]
+workers_dev = true
+
+[env.test.vars]
+IPFS_GATEWAYS = "[\"http://127.0.0.1:9081\", \"http://localhost:9082\", \"http://localhost:9083\"]"
+GATEWAY_HOSTNAME = 'ipfs.localhost:8787'
+DEBUG = "true"
+ENV = "test"
+
+# Dev!
+[env.vsantos]
+workers_dev = true
+account_id = "7ec0b7cf2ec201b2580374e53ba5f37b"
+
+[env.vsantos.vars]
+GATEWAY_HOSTNAME = 'ipfs.localhost:8787'
+IPFS_GATEWAYS = "[\"https://ipfs.io\"]"
