@@ -24,7 +24,7 @@ zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
 route = "link.web3.storage/*"
 
 [env.production.vars]
-IPFS_GATEWAYS = "[\"https://dweb.link\""
+IPFS_GATEWAYS = "[\"https://dweb.link\"]"
 GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
 DEBUG = "false"
 ENV = "production"
@@ -37,8 +37,8 @@ zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
 route = "link-staging.web3.storage/*"
 
 [env.staging.vars]
-IPFS_GATEWAYS = "[\"https://dweb.link\""
-GATEWAY_HOSTNAME = 'ipfs-staging.nftstorage.link'
+IPFS_GATEWAYS = "[\"https://dweb.link\"]"
+GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
 DEBUG = "true"
 ENV = "staging"
 
@@ -47,7 +47,7 @@ ENV = "staging"
 workers_dev = true
 
 [env.test.vars]
-IPFS_GATEWAYS = "[\"http://127.0.0.1:9081\", \"http://localhost:9082\", \"http://localhost:9083\"]"
+IPFS_GATEWAYS = "[\"https://dweb.link\"]"
 GATEWAY_HOSTNAME = 'ipfs.localhost:8787'
 DEBUG = "true"
 ENV = "test"
