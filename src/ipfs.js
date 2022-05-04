@@ -32,8 +32,9 @@ export async function ipfsGet(request, env) {
   if (!statusResponse) {
     // Get from origin and cache it if not cached
     statusResponse = await fetch(env.STATUS_CHECK_URL)
-    statusResponse.headers.set('Cache-Control', `public, max-age=60}`)
-    cache.put(request.url, statusResponse.clone())
+    const clone = statusResponse.clone()
+    clone.headers.set('Cache-Control', `public, max-age=60}`)
+    cache.put(request.url, clone)
   }
   const checker = await statusResponse.json()
 
