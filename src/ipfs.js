@@ -1,6 +1,7 @@
 /* global Response caches */
 
 import { normalizeCid } from './utils/cid.js'
+import { pickGatewayHost } from './utils/status-check.js'
 import { InvalidUrlError } from './errors.js'
 
 /**
@@ -26,20 +27,7 @@ export async function ipfsGet(request, env) {
     throw new InvalidUrlError(`invalid CID: ${cid}: ${err.message}`)
   }
 
-  // Get status of nftstorage.link gateway
-  const cache = caches.default
-  let statusResponse = await cache.match(env.STATUS_CHECK_URL)
-  if (!statusResponse) {
-    // Get from origin and cache it if not cached
-    statusResponse = await fetch(env.STATUS_CHECK_URL)
-    const clone = statusResponse.clone()
-    clone.headers.set('Cache-Control', `public, max-age=60}`)
-    cache.put(request.url, clone)
-  }
-  const checker = await statusResponse.json()
-
-  // Get URL to redirect
-  const hostname = checker.status === 'ok' ? env.IPFS_GATEWAY_HOSTNAME : env.ipfsGateways[0]
+  const hostname = await pickGatewayHost(caches.default, env)
   const url = new URL(
     `https://${nCid}.${hostname}${redirectPath}${redirectQueryString}`
   )
