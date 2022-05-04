@@ -7,6 +7,7 @@ import { Logging } from './logs.js'
  * @typedef {Object} EnvInput
  * @property {string} IPFS_GATEWAYS
  * @property {string} GATEWAY_HOSTNAME
+ * @property {string} STATUS_CHECK_URL
  * @property {string} VERSION
  * @property {string} SENTRY_RELEASE
  * @property {string} COMMITHASH
@@ -15,21 +16,11 @@ import { Logging } from './logs.js'
  * @property {string} ENV
  * @property {string} [SENTRY_DSN]
  * @property {string} [LOGTAIL_TOKEN]
- * @property {number} [REQUEST_TIMEOUT]
- * @property {Object} GATEWAYMETRICS
- * @property {Object} SUMMARYMETRICS
- * @property {Object} CIDSTRACKER
- * @property {Object} GATEWAYREDIRECTCOUNTER
- * @property {KVNamespace} DENYLIST
  *
  * @typedef {Object} EnvTransformed
  * @property {string} IPFS_GATEWAY_HOSTNAME
  * @property {string} IPNS_GATEWAY_HOSTNAME
  * @property {Array<string>} ipfsGateways
- * @property {DurableObjectNamespace} gatewayMetricsDurable
- * @property {DurableObjectNamespace} summaryMetricsDurable
- * @property {DurableObjectNamespace} cidsTrackerDurable
- * @property {DurableObjectNamespace} gatewayRedirectCounter
  * @property {number} REQUEST_TIMEOUT
  * @property {Toucan} [sentry]
  * @property {Logging} [log]

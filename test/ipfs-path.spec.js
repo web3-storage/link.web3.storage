@@ -35,7 +35,7 @@ test('should resolve a cid v0 with IPFS canonical resolution', async (t) => {
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    'https://bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi.ipfs.localhost:8787/'
+    'https://bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi.ipfs.nftstorage.link/'
   )
 })
 
@@ -49,7 +49,7 @@ test('should resolve a cid v1 with IPFS canonical resolution', async (t) => {
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    'https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.localhost:8787/'
+    'https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.nftstorage.link/'
   )
 })
 
@@ -63,7 +63,7 @@ test('should resolve a cid and path with IPFS canonical resolution', async (t) =
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.localhost:8787/path/file.txt'
+    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.nftstorage.link/path/file.txt'
   )
 })
 
@@ -71,13 +71,13 @@ test('should resolve a cid and path with IPFS canonical resolution when subdomai
   const { mf } = t.context
 
   const response = await mf.dispatchFetch(
-    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.localhost:8787/ipfs/bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu/path/file.txt'
+    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.nftstorage.link/ipfs/bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu/path/file.txt'
   )
   await response.waitUntil()
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.localhost:8787/path/file.txt'
+    'https://bafybeifvsmjgbhck72pabliifeo35cew5yhxujfqjxg4g32vr3yv24h6zu.ipfs.nftstorage.link/path/file.txt'
   )
 })
 
@@ -92,7 +92,7 @@ test('should resolve a cid IPFS canonical resolution keeping query parameters', 
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    `https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.localhost:8787/${queryString}`
+    `https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.nftstorage.link/${queryString}`
   )
 })
 
@@ -106,6 +106,6 @@ test('should resolve a cid IPFS canonical resolution with same path as IPFS path
   t.is(response.status, 302)
   t.is(
     response.headers.get('location'),
-    'https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.localhost:8787/ipfs/bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq'
+    'https://bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq.ipfs.nftstorage.link/ipfs/bafkreidyeivj7adnnac6ljvzj2e3rd5xdw3revw4da7mx2ckrstapoupoq'
   )
 })

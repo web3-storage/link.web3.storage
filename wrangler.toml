@@ -24,8 +24,9 @@ zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
 route = "link.web3.storage/*"
 
 [env.production.vars]
-IPFS_GATEWAYS = "[\"https://dweb.link\"]"
+IPFS_GATEWAYS = "[\"ipfs.dweb.link\"]"
 GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
+STATUS_CHECK_URL = 'https://api.nftstoragestatus.com/'
 DEBUG = "false"
 ENV = "production"
 
@@ -37,8 +38,9 @@ zone_id = "7eee3323c1b35b6650568604c65f441e"    # web3.storage zone
 route = "link-staging.web3.storage/*"
 
 [env.staging.vars]
-IPFS_GATEWAYS = "[\"https://dweb.link\"]"
+IPFS_GATEWAYS = "[\"ipfs.dweb.link\"]"
 GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
+STATUS_CHECK_URL = 'https://api.nftstoragestatus.com/'
 DEBUG = "true"
 ENV = "staging"
 
@@ -47,8 +49,9 @@ ENV = "staging"
 workers_dev = true
 
 [env.test.vars]
-IPFS_GATEWAYS = "[\"https://dweb.link\"]"
-GATEWAY_HOSTNAME = 'ipfs.localhost:8787'
+IPFS_GATEWAYS = "[\"ipfs.dweb.link\"]"
+GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
+STATUS_CHECK_URL = 'https://api.nftstoragestatus.com/'
 DEBUG = "true"
 ENV = "test"
 
@@ -58,5 +61,6 @@ workers_dev = true
 account_id = "7ec0b7cf2ec201b2580374e53ba5f37b"
 
 [env.vsantos.vars]
-GATEWAY_HOSTNAME = 'ipfs.localhost:8787'
-IPFS_GATEWAYS = "[\"https://ipfs.io\"]"
+GATEWAY_HOSTNAME = 'ipfs.nftstorage.link'
+IPFS_GATEWAYS = "[\"ipfs.dweb.link\"]"
+STATUS_CHECK_URL = 'https://api.nftstoragestatus.com/'
