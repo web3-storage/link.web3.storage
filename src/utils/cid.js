@@ -50,8 +50,10 @@ export function cidToGatewayUrl({cid, path, search = ''}, gatewayHost) {
 // https://link.xyz/https://gw.exz/ipfs/<cid>/<path> => https://<cid>.ipfs.nftstorage.link/path
 // https://link.xyz/ipfs://<cid>/<path> => ipfs://<cid>/<path> => https://<cid>.ipfs.nftstorage.link/path
 
-export function findPathUrl ({ pathname, search }, gatewayHost) {
-  const urlStr = pathname.substring(1)
+export function findPathUrl (reqUrl, gatewayHost) {
+  const { origin, hash, search } = new URL(reqUrl)
+  // URL.pathname implementation in CF is different, one "/" is lost in the URL path
+  const urlStr = reqUrl.replace(origin, '').replace(hash, '').replace(search, '').substring(1)
   if (urlStr.startsWith('ipfs://')) {
     const cidPath = urlStr.substring('ipfs://'.length)
     const [cid, ...rest] = cidPath.split('/')
