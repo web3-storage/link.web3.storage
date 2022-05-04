@@ -1,3 +1,5 @@
+/* global Response caches */
+
 import { normalizeCid } from './utils/cid.js'
 import { InvalidUrlError } from './errors.js'
 
@@ -23,8 +25,22 @@ export async function ipfsGet(request, env) {
   } catch (err) {
     throw new InvalidUrlError(`invalid CID: ${cid}: ${err.message}`)
   }
+
+  // Get status of nftstorage.link gateway
+  const cache = caches.default
+  let statusResponse = await cache.match(env.STATUS_CHECK_URL)
+  if (!statusResponse) {
+    // Get from origin and cache it if not cached
+    statusResponse = await fetch(env.STATUS_CHECK_URL)
+    statusResponse.headers.set('Cache-Control', `public, max-age=60}`)
+    cache.put(request.url, statusResponse.clone())
+  }
+  const checker = await statusResponse.json()
+
+  // Get URL to redirect
+  const hostname = checker.status === 'ok' ? env.IPFS_GATEWAY_HOSTNAME : env.ipfsGateways[0]
   const url = new URL(
-    `https://${nCid}.${env.IPFS_GATEWAY_HOSTNAME}${redirectPath}${redirectQueryString}`
+    `https://${nCid}.${hostname}${redirectPath}${redirectQueryString}`
   )
 
   return Response.redirect(url, 302)
