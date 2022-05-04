@@ -1,3 +1,4 @@
+import { pickGatewayHost } from './utils/status-check.js'
 import { findPathUrl } from './utils/cid'
 
 /**
@@ -7,6 +8,7 @@ import { findPathUrl } from './utils/cid'
  * @param {import('./env').Env} env
  */
 export async function anyUrlGet (request, env) {
-  const url = findPathUrl(request.url, env.IPFS_GATEWAY_HOSTNAME)
+  const hostname = await pickGatewayHost(caches.default, env)
+  const url = findPathUrl(request.url, hostname)
   return Response.redirect(url, 302)  
 }
