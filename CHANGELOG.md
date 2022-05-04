@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://github.com/web3-storage/link.web3.storage/compare/v1.0.0...v1.0.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* dont modify immutable headers ([#4](https://github.com/web3-storage/link.web3.storage/issues/4)) ([144dbbe](https://github.com/web3-storage/link.web3.storage/commit/144dbbe2e425cb0350cded571a698b4257c7de1f))
+
 ## 1.0.0 (2022-05-04)
 
 
