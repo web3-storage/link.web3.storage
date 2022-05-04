@@ -3,6 +3,7 @@
 import { Router } from 'itty-router'
 
 import { ipfsGet } from './ipfs.js'
+import { anyUrlGet } from './any-url.js'
 
 import { addCorsHeaders, withCorsHeaders } from './cors.js'
 import { errorHandler } from './error-handler.js'
@@ -16,6 +17,7 @@ router
   .get('/ipfs/:cid/*', withCorsHeaders(ipfsGet))
   .head('/ipfs/:cid', withCorsHeaders(ipfsGet))
   .head('/ipfs/:cid/*', withCorsHeaders(ipfsGet))
+  .get('*', withCorsHeaders(anyUrlGet))
 
 /**
  * @param {Error} error
